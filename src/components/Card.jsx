@@ -1,12 +1,12 @@
 import "../styles.css";
 
 const cardImages = [
-  { src: "/assets/pics/back.png" },
-  { src: "/assets/pics/bae-1.png" },
-  { src: "/assets/pics/fauna-1.png" },
-  { src: "/assets/pics/mumei-1.png" },
-  { src: "/assets/pics/irys-1.png" },
-  { src: "/assets/pics/kronii-1.png" },
+  { src: "./assets/pics/back.png" },
+  { src: "./assets/pics/bae-1.png" },
+  { src: "./assets/pics/fauna-1.png" },
+  { src: "./assets/pics/mumei-1.png" },
+  { src: "./assets/pics/irys-1.png" },
+  { src: "./assets/pics/kronii-1.png" },
 ];
 
 const Card = ({
