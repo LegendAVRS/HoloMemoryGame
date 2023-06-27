@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import ShuffleButton from "./components/ShuffleButton";
 import CardContainer from "./components/CardContainer";
-import { shuffleCard } from "./utils/Shuffle";
+import { shuffleCard } from "./utils/shuffleCard";
+import InfoContainer from "./components/InfoContainer";
+import ButtonContainer from "./components/ButtonContainer";
 
 function App() {
   // states
@@ -14,15 +16,14 @@ function App() {
 
   // setting card list on initial load
   useEffect(() => {
-    let newCardList = [];
-    let id = 1;
-    for (let i = 1; i <= cardNumber; i++) {
-      newCardList.push(id);
-      id = i % 4 === 0 ? id + 1 : id;
-    }
-
+    // let newCardList = [];
+    // let id = 1;
+    // for (let i = 1; i <= cardNumber; i++) {
+    //   newCardList.push(id);
+    //   id = i % 4 === 0 ? id + 1 : id;
+    // }
     shuffleCard(
-      newCardList,
+      cardNumber,
       setCardList,
       setChosenCardList,
       setDisabledCardList,
@@ -50,8 +51,6 @@ function App() {
       tempCard = card;
     }
     if (matched) {
-      console.log("matched");
-
       setTimeout(() => {
         setDisabledCardList([
           ...disabledCardList,
@@ -59,19 +58,15 @@ function App() {
         ]);
       }, 1000);
     }
-    setTimeout(() => setChosenCardList([]), 1000);
+    setTimeout(() => {
+      setChosenCardList([]);
+    }, 1000);
   }, [chosenCardList]);
 
   // components
   return (
     <div className={"body"}>
-      <ShuffleButton
-        cardList={cardList}
-        setCardList={setCardList}
-        setDisabledCardList={setDisabledCardList}
-        setChosenCardList={setChosenCardList}
-        setShuffled={setShuffled}
-      ></ShuffleButton>
+      <InfoContainer></InfoContainer>
       <CardContainer
         cardNumber={cardNumber}
         cardList={cardList}
@@ -82,6 +77,16 @@ function App() {
         disabledCardList={disabledCardList}
         shuffled={shuffled}
       ></CardContainer>
+      <ButtonContainer>
+        <ShuffleButton
+          cardList={cardList}
+          setCardList={setCardList}
+          setDisabledCardList={setDisabledCardList}
+          setChosenCardList={setChosenCardList}
+          setShuffled={setShuffled}
+          cardNumber={cardNumber}
+        ></ShuffleButton>
+      </ButtonContainer>
     </div>
   );
 }

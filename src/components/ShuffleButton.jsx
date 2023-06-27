@@ -1,7 +1,7 @@
-import { shuffleCard } from "../utils/Shuffle";
+import { shuffleCard } from "../utils/shuffleCard";
 
 const ShuffleButton = ({
-  cardList,
+  cardNumber,
   setCardList,
   setChosenCardList,
   setDisabledCardList,
@@ -10,15 +10,17 @@ const ShuffleButton = ({
   return (
     <button
       className={"btn"}
-      onClick={() =>
+      onClick={() => {
         shuffleCard(
-          cardList,
+          cardNumber,
           setCardList,
           setChosenCardList,
           setDisabledCardList,
           setShuffled
-        )
-      }
+        );
+        var shuffleAudio = new Audio("assets/sfx/shuffle.mp3");
+        shuffleAudio.play();
+      }}
     >
       Shuffle
     </button>

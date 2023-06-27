@@ -10,6 +10,8 @@ const CardContainer = ({
   maxMatch,
   disabledCardList,
   shuffled,
+  checkingCardList,
+  setCheckingCardList,
 }) => {
   return (
     <div className={"grid grid-cols-4 w-fit gap-1"}>
@@ -24,6 +26,8 @@ const CardContainer = ({
             maxMatch={maxMatch}
             disabledCardList={disabledCardList}
             shuffled={shuffled}
+            setCheckingCardList={setCheckingCardList}
+            checkingCardList={checkingCardList}
           ></Card>
         ))}
     </div>

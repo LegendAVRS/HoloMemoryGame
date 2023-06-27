@@ -12,8 +12,12 @@
 }
 
 .body {
-  @apply flex flex-col items-center bg-slate-200 w-screen h-screen;
-  background-image: url("../public/assets/pics/bg_pc.webp");
+  @apply flex items-center bg-slate-200 w-screen h-screen justify-evenly;
+  background-image: url("/assets/pics/bg_pc.webp");
+}
+
+body {
+  overflow: hidden;
 }
 
 /* card back */
@@ -44,7 +48,8 @@
 }
 
 .card.disabled {
-  @apply hover:cursor-default bg-green-200;
+  @apply hover:cursor-default;
+  background-image: url("assets/pics/bg_correct.webp");
 }
 
 .card.disabled .front {
@@ -56,5 +61,21 @@
 }
 
 .btn {
-  @apply border rounded bg-red-400 px-5 py-2;
+  /* @apply border rounded px-5 py-2 m-auto; */
+  padding: 0.8em calc(5% + clamp(28px, 4vw, 38px) + 1%);
+  margin: 0 auto;
+  border: 3px solid #fcfcfc;
+  border-radius: 9999px;
+  text-align: center;
+  background: linear-gradient(0deg, #111341 0%, #222681 100%);
+  font-weight: bold;
+  color: #fcfcfc;
+  font-size: clamp(22px, 4vw, 30px);
+  line-height: 1.2em;
+  letter-spacing: 0.1em;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background: linear-gradient(180deg, #111341 0%, #222681 100%);
 }

@@ -522,6 +522,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.flex {
+  display: flex;
+}
+
 .grid {
   display: grid;
 }
@@ -529,6 +533,10 @@ video {
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.grow {
+  flex-grow: 1;
 }
 
 .grid-cols-4 {
@@ -570,11 +578,15 @@ video {
   display: flex;
   height: 100vh;
   width: 100vw;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   --tw-bg-opacity: 1;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
-  background-image: url("../public/assets/pics/bg_pc.webp");
+  background-image: url("/assets/pics/bg_pc.webp");
+}
+
+body {
+  overflow: hidden;
 }
 
 /* card back */
@@ -605,13 +617,12 @@ video {
   transition-delay: 0.2s;
 }
 
-.card.disabled {
-  --tw-bg-opacity: 1;
-  background-color: rgb(187 247 208 / var(--tw-bg-opacity));
-}
-
 .card.disabled:hover {
   cursor: default;
+}
+
+.card.disabled {
+  background-image: url("assets/pics/bg_correct.webp");
 }
 
 .card.disabled .front {
@@ -623,12 +634,21 @@ video {
 }
 
 .btn {
-  border-radius: 0.25rem;
-  border-width: 1px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  /* @apply border rounded px-5 py-2 m-auto; */
+  padding: 0.8em calc(5% + clamp(28px, 4vw, 38px) + 1%);
+  margin: 0 auto;
+  border: 3px solid #fcfcfc;
+  border-radius: 9999px;
+  text-align: center;
+  background: linear-gradient(0deg, #111341 0%, #222681 100%);
+  font-weight: bold;
+  color: #fcfcfc;
+  font-size: clamp(22px, 4vw, 30px);
+  line-height: 1.2em;
+  letter-spacing: 0.1em;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background: linear-gradient(180deg, #111341 0%, #222681 100%);
 }

@@ -1,12 +1,17 @@
 import "../styles.css";
 
 const cardImages = [
-  { src: "./assets/pics/back.png" },
-  { src: "./assets/pics/bae-1.png" },
-  { src: "./assets/pics/fauna-1.png" },
-  { src: "./assets/pics/mumei-1.png" },
-  { src: "./assets/pics/irys-1.png" },
-  { src: "./assets/pics/kronii-1.png" },
+  { src: "./assets/pics/back.webp" },
+  { src: "./assets/pics/bae-1.webp" },
+  { src: "./assets/pics/fauna-1.webp" },
+  { src: "./assets/pics/mumei-1.webp" },
+  { src: "./assets/pics/irys-1.webp" },
+  { src: "./assets/pics/kronii-1.webp" },
+  { src: "./assets/pics/calli-1.webp" },
+  { src: "./assets/pics/gura-1.webp" },
+  { src: "./assets/pics/ame-1.webp" },
+  { src: "./assets/pics/kiara-1.webp" },
+  { src: "./assets/pics/ina-1.webp" },
 ];
 
 const Card = ({
