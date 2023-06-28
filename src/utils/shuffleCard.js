@@ -11,8 +11,9 @@ export const shuffleCard = (
   // shuffles
   let shuffledCardList = generateCardList(cardNumber);
   shuffle(shuffledCardList);
-  setCardList(shuffledCardList);
   setChosenCardList([]);
   setDisabledCardList([]);
   setShuffled(true);
+
+  setCardList(shuffledCardList);
 };

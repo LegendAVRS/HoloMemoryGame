@@ -16,12 +16,6 @@ function App() {
 
   // setting card list on initial load
   useEffect(() => {
-    // let newCardList = [];
-    // let id = 1;
-    // for (let i = 1; i <= cardNumber; i++) {
-    //   newCardList.push(id);
-    //   id = i % 4 === 0 ? id + 1 : id;
-    // }
     shuffleCard(
       cardNumber,
       setCardList,
