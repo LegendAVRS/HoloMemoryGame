@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import ShuffleButton from "./components/ShuffleButton";
 import CardContainer from "./components/CardContainer";
 import { shuffleCard } from "./utils/shuffleCard";
+import Timer from "./components/Timer";
+import IconContainer from "./components/IconContainer";
 import InfoContainer from "./components/InfoContainer";
-import ButtonContainer from "./components/ButtonContainer";
+import MoveCount from "./components/MoveCount";
 
 function App() {
   // states
@@ -13,6 +15,9 @@ function App() {
   const [maxMatch, setMaxMatch] = useState(2);
   const [disabledCardList, setDisabledCardList] = useState([]);
   const [shuffled, setShuffled] = useState(false);
+  const [time, setTime] = useState(0);
+  const [timeInterval, setTimeInterval] = useState(null);
+  const [moveCount, setMoveCount] = useState(0);
 
   // setting card list on initial load
   useEffect(() => {
@@ -29,11 +34,18 @@ function App() {
   useEffect(() => {
     if (shuffled) {
       setTimeout(() => setShuffled(false), 1000);
+      if (timeInterval !== null) clearInterval(timeInterval);
+      const interval = setInterval(() => setTime((time) => time + 1), 1000);
+      setTimeInterval(interval);
+      setTime(0);
+      setMoveCount(0);
     }
   }, [shuffled]);
 
   // handles card choosing event
   useEffect(() => {
+    if (chosenCardList.length !== 0) setMoveCount((moveCount) => moveCount + 1);
+    if (disabledCardList.length === cardNumber) clearInterval(timeInterval);
     if (chosenCardList.length < maxMatch) return;
     let matched = true,
       tempCard = chosenCardList[0];
@@ -55,12 +67,12 @@ function App() {
     setTimeout(() => {
       setChosenCardList([]);
     }, 1000);
-  }, [chosenCardList]);
+  }, [chosenCardList, disabledCardList]);
 
   // components
   return (
     <div className={"body"}>
-      <InfoContainer></InfoContainer>
+      <IconContainer></IconContainer>
       <CardContainer
         cardNumber={cardNumber}
         cardList={cardList}
@@ -71,7 +83,8 @@ function App() {
         disabledCardList={disabledCardList}
         shuffled={shuffled}
       ></CardContainer>
-      <ButtonContainer>
+      <InfoContainer>
+        <Timer time={time}></Timer>
         <ShuffleButton
           cardList={cardList}
           setCardList={setCardList}
@@ -80,7 +93,8 @@ function App() {
           setShuffled={setShuffled}
           cardNumber={cardNumber}
         ></ShuffleButton>
-      </ButtonContainer>
+        <MoveCount moveCount={moveCount}></MoveCount>
+      </InfoContainer>
     </div>
   );
 }
