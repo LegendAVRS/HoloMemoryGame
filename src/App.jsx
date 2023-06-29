@@ -72,7 +72,7 @@ function App() {
   // components
   return (
     <div className={"body"}>
-      <IconContainer></IconContainer>
+      <IconContainer alt={false}></IconContainer>
       <CardContainer
         cardNumber={cardNumber}
         cardList={cardList}
@@ -84,6 +84,7 @@ function App() {
         shuffled={shuffled}
       ></CardContainer>
       <InfoContainer>
+        <IconContainer alt={true}></IconContainer>
         <Timer time={time}></Timer>
         <ShuffleButton
           cardList={cardList}

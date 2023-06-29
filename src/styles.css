@@ -534,11 +534,6 @@ video {
   height: 100%;
 }
 
-.w-fit {
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
 .grow {
   flex-grow: 1;
 }
@@ -551,6 +546,10 @@ video {
   flex-direction: column;
 }
 
+.items-center {
+  align-items: center;
+}
+
 .justify-evenly {
   justify-content: space-evenly;
 }
@@ -559,10 +558,13 @@ video {
   gap: 0.25rem;
 }
 
+.temp {
+  height: 98%;
+  width: 49%;
+}
+
 .card {
   display: flex;
-  height: 170px;
-  width: 170px;
   align-items: center;
   justify-content: center;
   border-radius: 0.25rem;
@@ -613,16 +615,20 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
   background-image: url("/assets/pics/bg_pc.webp");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 0.3rem;
 }
 
 body {
   overflow: hidden;
+  /* position: fixed; */
 }
 
 /* card back */
 
 .card .back {
-  width: 100px;
+  width: 50%;
   height: auto;
   transition: all ease-in 0.2s;
   transition-delay: 0.2s;
@@ -639,7 +645,8 @@ body {
   transform: rotateY(90deg);
   transition: all ease-in 0.2s;
   position: absolute;
-  width: 100%;
+  width: 90%;
+  height: auto;
 }
 
 .selected .front {
@@ -671,7 +678,6 @@ body {
 .btn {
   /* @apply border rounded px-5 py-2 m-auto; */
   padding: 0.8em calc(5% + clamp(28px, 4vw, 38px) + 1%);
-  margin: 0 auto;
   border: 3px solid #fcfcfc;
   border-radius: 9999px;
   text-align: center;
@@ -699,6 +705,10 @@ body {
   transition: all 0.1s ease;
 }
 
+.logo div img {
+  margin: auto;
+}
+
 .logo:hover {
   transform: scale(1.05);
   cursor: pointer;
@@ -710,7 +720,6 @@ body {
 .box {
   text-align: center;
   padding: 0.8em calc(5% + clamp(28px, 4vw, 38px) + 1%);
-  margin: 0 auto;
   border: 3px solid #fcfcfc;
   background: linear-gradient(
     0deg,
@@ -723,4 +732,69 @@ body {
   line-height: 1.2em;
   letter-spacing: 0.1em;
   overflow: hidden;
+}
+
+.logo-alt {
+  display: none;
+}
+
+/* media */
+
+@media (max-width: 1324px) {
+  .logo {
+    display: none;
+  }
+
+  .logo-alt {
+    display: block;
+  }
+
+  .card-container {
+    width: 60%;
+  }
+
+  .card .front {
+    width: 80%;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 695px) {
+  .body {
+    display: block;
+    background-image: url("/assets/pics/bg_sp.webp");
+  }
+
+  body {
+    overflow: visible;
+  }
+
+  .card-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 2560px) {
+  .btn {
+    transform: scale(1.5);
+  }
+
+  .box {
+    transform: scale(1.5);
+  }
+
+  .logo {
+    /* transform: scale(1.5); */
+    width: 25%;
+  }
+
+  .logo img {
+    transform: scale(1.5);
+  }
 }

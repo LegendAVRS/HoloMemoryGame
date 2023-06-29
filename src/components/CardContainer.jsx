@@ -14,7 +14,7 @@ const CardContainer = ({
   setCheckingCardList,
 }) => {
   return (
-    <div className={"grid grid-cols-4 w-fit gap-1"}>
+    <div className={"grid grid-cols-4 gap-1 temp card-container"}>
       {cardList &&
         cardList.map((card, ind) => (
           <Card

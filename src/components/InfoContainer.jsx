@@ -1,6 +1,8 @@
 const InfoContainer = ({ children }) => {
   return (
-    <div className={"grow flex flex-col justify-evenly h-full"}>{children}</div>
+    <div className={"grow flex flex-col justify-evenly items-center h-full"}>
+      {children}
+    </div>
   );
 };
 

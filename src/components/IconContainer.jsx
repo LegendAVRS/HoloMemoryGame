@@ -1,7 +1,7 @@
-const InfoContainer = () => {
+const IconContainer = ({ alt }) => {
   return (
     <a
-      className={"logo"}
+      className={`logo ${alt ? "logo-alt" : ""}`}
       href="https://connecttheworld.hololivepro.com/"
       target="_blank"
     >
@@ -12,4 +12,4 @@ const InfoContainer = () => {
   );
 };
 
-export default InfoContainer;
+export default IconContainer;
