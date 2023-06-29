@@ -1,11 +1,53 @@
+// react import
 import { useEffect, useState } from "react";
+
+// components
 import ShuffleButton from "./components/ShuffleButton";
 import CardContainer from "./components/CardContainer";
-import { shuffleCard } from "./utils/shuffleCard";
 import Timer from "./components/Timer";
 import IconContainer from "./components/IconContainer";
 import InfoContainer from "./components/InfoContainer";
 import MoveCount from "./components/MoveCount";
+
+// utils
+import { shuffleCard } from "./utils/shuffleCard";
+import PrContainer from "./components/PrContainer";
+
+// audio
+const sfx = {
+  shuffle: new Audio("assets/sfx/shuffle.mp3"),
+  correct: new Audio("assets/sfx/correct.mp3"),
+};
+
+// card stuff
+const cardData = [
+  { img: "./assets/pics/back.webp" },
+  { img: "./assets/pics/bae-1.webp", audio: new Audio("assets/sfx/bae.mp3") },
+  {
+    img: "./assets/pics/fauna-1.webp",
+    audio: new Audio("assets/sfx/fauna.mp3"),
+  },
+  {
+    img: "./assets/pics/mumei-1.webp",
+    audio: new Audio("assets/sfx/mumei.mp3"),
+  },
+  { img: "./assets/pics/irys-1.webp", audio: new Audio("assets/sfx/irys.mp3") },
+  {
+    img: "./assets/pics/kronii-1.webp",
+    audio: new Audio("assets/sfx/kronii.mp3"),
+  },
+  {
+    img: "./assets/pics/calli-1.webp",
+    audio: new Audio("assets/sfx/calli.mp3"),
+  },
+  { img: "./assets/pics/gura-1.webp", audio: new Audio("assets/sfx/gura.mp3") },
+  { img: "./assets/pics/ame-1.webp", audio: new Audio("assets/sfx/ame.mp3") },
+  {
+    img: "./assets/pics/kiara-1.webp",
+    audio: new Audio("assets/sfx/kiara.mp3"),
+  },
+  { img: "./assets/pics/ina-1.webp", audio: new Audio("assets/sfx/ina.mp3") },
+];
 
 function App() {
   // states
@@ -18,6 +60,7 @@ function App() {
   const [time, setTime] = useState(0);
   const [timeInterval, setTimeInterval] = useState(null);
   const [moveCount, setMoveCount] = useState(0);
+  const [done, setDone] = useState(false);
 
   // setting card list on initial load
   useEffect(() => {
@@ -33,19 +76,24 @@ function App() {
   // handles card showing on shuffle
   useEffect(() => {
     if (shuffled) {
-      setTimeout(() => setShuffled(false), 1000);
+      setTimeout(() => setShuffled(false), 2000);
       if (timeInterval !== null) clearInterval(timeInterval);
       const interval = setInterval(() => setTime((time) => time + 1), 1000);
       setTimeInterval(interval);
       setTime(0);
       setMoveCount(0);
+      setDone(false);
     }
   }, [shuffled]);
 
   // handles card choosing event
   useEffect(() => {
     if (chosenCardList.length !== 0) setMoveCount((moveCount) => moveCount + 1);
-    if (disabledCardList.length === cardNumber) clearInterval(timeInterval);
+    if (disabledCardList.length === cardNumber && !shuffled) {
+      clearInterval(timeInterval);
+      setDone(true);
+    }
+
     if (chosenCardList.length < maxMatch) return;
     let matched = true,
       tempCard = chosenCardList[0];
@@ -62,14 +110,16 @@ function App() {
           ...disabledCardList,
           ...chosenCardList.map((card) => card.index),
         ]);
-      }, 1000);
+        sfx.correct.play();
+
+        cardData[chosenCardList[0].id].audio.play();
+      }, 700);
     }
     setTimeout(() => {
       setChosenCardList([]);
-    }, 1000);
+    }, 700);
   }, [chosenCardList, disabledCardList]);
 
-  // components
   return (
     <div className={"body"}>
       <IconContainer alt={false}></IconContainer>
@@ -82,10 +132,11 @@ function App() {
         maxMatch={maxMatch}
         disabledCardList={disabledCardList}
         shuffled={shuffled}
+        cardData={cardData}
       ></CardContainer>
       <InfoContainer>
         <IconContainer alt={true}></IconContainer>
-        <Timer time={time}></Timer>
+        <Timer time={time} done={done}></Timer>
         <ShuffleButton
           cardList={cardList}
           setCardList={setCardList}
@@ -93,8 +144,10 @@ function App() {
           setChosenCardList={setChosenCardList}
           setShuffled={setShuffled}
           cardNumber={cardNumber}
+          sfx={sfx}
         ></ShuffleButton>
-        <MoveCount moveCount={moveCount}></MoveCount>
+        <MoveCount moveCount={moveCount} done={done}></MoveCount>
+        <PrContainer></PrContainer>
       </InfoContainer>
     </div>
   );

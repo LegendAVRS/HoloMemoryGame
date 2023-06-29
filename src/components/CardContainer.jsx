@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Card from "./Card";
 
 const CardContainer = ({
@@ -12,9 +11,10 @@ const CardContainer = ({
   shuffled,
   checkingCardList,
   setCheckingCardList,
+  cardData,
 }) => {
   return (
-    <div className={"grid grid-cols-4 gap-1 temp card-container"}>
+    <div className={"grid grid-cols-4 gap-1 card-container"}>
       {cardList &&
         cardList.map((card, ind) => (
           <Card
@@ -28,6 +28,7 @@ const CardContainer = ({
             shuffled={shuffled}
             setCheckingCardList={setCheckingCardList}
             checkingCardList={checkingCardList}
+            cardData={cardData}
           ></Card>
         ))}
     </div>

@@ -12,7 +12,7 @@ export const shuffleCard = (
   let shuffledCardList = generateCardList(cardNumber);
   shuffle(shuffledCardList);
   setChosenCardList([]);
-  setDisabledCardList([]);
+  setTimeout(() => setDisabledCardList([]), 700);
   setShuffled(true);
 
   setCardList(shuffledCardList);

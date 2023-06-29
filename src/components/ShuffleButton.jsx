@@ -6,6 +6,7 @@ const ShuffleButton = ({
   setChosenCardList,
   setDisabledCardList,
   setShuffled,
+  sfx,
 }) => {
   return (
     <button
@@ -18,8 +19,7 @@ const ShuffleButton = ({
           setDisabledCardList,
           setShuffled
         );
-        var shuffleAudio = new Audio("assets/sfx/shuffle.mp3");
-        shuffleAudio.play();
+        sfx.shuffle.play();
       }}
     >
       Shuffle

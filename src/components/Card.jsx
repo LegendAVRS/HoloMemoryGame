@@ -1,19 +1,3 @@
-import "../styles.css";
-
-const cardImages = [
-  { src: "./assets/pics/back.webp" },
-  { src: "./assets/pics/bae-1.webp" },
-  { src: "./assets/pics/fauna-1.webp" },
-  { src: "./assets/pics/mumei-1.webp" },
-  { src: "./assets/pics/irys-1.webp" },
-  { src: "./assets/pics/kronii-1.webp" },
-  { src: "./assets/pics/calli-1.webp" },
-  { src: "./assets/pics/gura-1.webp" },
-  { src: "./assets/pics/ame-1.webp" },
-  { src: "./assets/pics/kiara-1.webp" },
-  { src: "./assets/pics/ina-1.webp" },
-];
-
 const Card = ({
   id,
   chosenCardList,
@@ -22,6 +6,7 @@ const Card = ({
   maxMatch,
   disabledCardList,
   shuffled,
+  cardData,
 }) => {
   const selected = () => {
     return chosenCardList.some((card) => card.index === index);
@@ -48,12 +33,12 @@ const Card = ({
   return (
     <div
       className={`card ${selected() || shuffled ? "selected" : ""} ${
-        disabled() ? "disabled" : ""
+        disabled() && !shuffled ? "disabled" : ""
       }`}
       onClick={handleClick}
     >
-      <img src={cardImages[0].src} className={"back"}></img>
-      <img src={cardImages[id].src} className={"front"}></img>
+      <img src={cardData[0].img} className={"back"}></img>
+      <img src={cardData[id].img} className={"front"}></img>
     </div>
   );
 };

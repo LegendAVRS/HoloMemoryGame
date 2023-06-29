@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-
-const Timer = ({ time, setTime }) => {
+const Timer = ({ time, done }) => {
   const formatTime = (time) => {
     let min = Math.floor(time / 60);
     let sec = time % 60;
@@ -8,12 +6,14 @@ const Timer = ({ time, setTime }) => {
     let strSec = sec < 10 ? "0" + sec.toString() : sec.toString();
     return `${strMin}:${strSec}`;
   };
-
-  //   useEffect(() => {
-  //     setTime()
-  //   })
-
-  return <div className={"box timer"}>{formatTime(time)}</div>;
+  return (
+    <>
+      <div className={"label"}>Time</div>
+      <div className={`box timer ${done ? "done" : ""}`}>
+        {formatTime(time)}
+      </div>
+    </>
+  );
 };
 
 export default Timer;
