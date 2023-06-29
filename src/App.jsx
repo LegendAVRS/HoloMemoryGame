@@ -122,6 +122,8 @@ function App() {
 
   return (
     <div className={"body"}>
+      <img className={"dots"} src="assets\pics\deco\bg_deco_dot.svg"></img>
+      <img className={"deco"} src="assets\pics\deco\bg_deco_geometry.png"></img>
       <IconContainer alt={false}></IconContainer>
       <CardContainer
         cardNumber={cardNumber}
