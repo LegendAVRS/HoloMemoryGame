@@ -12,6 +12,7 @@ const CardContainer = ({
   checkingCardList,
   setCheckingCardList,
   cardData,
+  sfx,
 }) => {
   return (
     <div className={"grid grid-cols-4 gap-1 card-container"}>
@@ -29,6 +30,7 @@ const CardContainer = ({
             setCheckingCardList={setCheckingCardList}
             checkingCardList={checkingCardList}
             cardData={cardData}
+            sfx={sfx}
           ></Card>
         ))}
     </div>

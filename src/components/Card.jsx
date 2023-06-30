@@ -7,6 +7,7 @@ const Card = ({
   disabledCardList,
   shuffled,
   cardData,
+  sfx,
 }) => {
   const selected = () => {
     return chosenCardList.some((card) => card.index === index);
@@ -28,6 +29,7 @@ const Card = ({
   const handleClick = () => {
     if (!valid()) return;
     let newChosenCardList = [...chosenCardList, { id, index }];
+    sfx.click.play();
     setChosenCardList(newChosenCardList);
   };
   return (

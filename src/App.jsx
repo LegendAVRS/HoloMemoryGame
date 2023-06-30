@@ -17,6 +17,8 @@ import PrContainer from "./components/PrContainer";
 const sfx = {
   shuffle: new Audio("assets/sfx/shuffle.mp3"),
   correct: new Audio("assets/sfx/correct.mp3"),
+  incorrect: new Audio("assets/sfx/incorrect.mp3"),
+  click: new Audio("assets/sfx/click.mp3"),
 };
 
 // card stuff
@@ -49,6 +51,9 @@ const cardData = [
   { img: "./assets/pics/ina-1.webp", audio: new Audio("assets/sfx/ina.mp3") },
 ];
 
+// concert day
+const finalDate = new Date(Date.UTC(2023, 6, 3, 1, 0, 0));
+
 function App() {
   // states
   const [cardNumber, setCardNumber] = useState(16);
@@ -61,6 +66,7 @@ function App() {
   const [timeInterval, setTimeInterval] = useState(null);
   const [moveCount, setMoveCount] = useState(0);
   const [done, setDone] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(0);
 
   // setting card list on initial load
   useEffect(() => {
@@ -71,6 +77,9 @@ function App() {
       setDisabledCardList,
       setShuffled
     );
+    const interval = setInterval(() => {
+      setTimeLeft(finalDate.getTime() - new Date().getTime());
+    }, 1000);
   }, []);
 
   // handles card showing on shuffle
@@ -114,6 +123,8 @@ function App() {
 
         cardData[chosenCardList[0].id].audio.play();
       }, 700);
+    } else {
+      setTimeout(() => sfx.incorrect.play(), 700);
     }
     setTimeout(() => {
       setChosenCardList([]);
@@ -124,7 +135,7 @@ function App() {
     <div className={"body"}>
       <img className={"dots"} src="assets\pics\deco\bg_deco_dot.svg"></img>
       <img className={"deco"} src="assets\pics\deco\bg_deco_geometry.png"></img>
-      <IconContainer alt={false}></IconContainer>
+      <IconContainer alt={false} timeLeft={timeLeft}></IconContainer>
       <CardContainer
         cardNumber={cardNumber}
         cardList={cardList}
@@ -135,9 +146,10 @@ function App() {
         disabledCardList={disabledCardList}
         shuffled={shuffled}
         cardData={cardData}
+        sfx={sfx}
       ></CardContainer>
       <InfoContainer>
-        <IconContainer alt={true}></IconContainer>
+        <IconContainer alt={true} timeLeft={timeLeft}></IconContainer>
         <Timer time={time} done={done}></Timer>
         <ShuffleButton
           cardList={cardList}
